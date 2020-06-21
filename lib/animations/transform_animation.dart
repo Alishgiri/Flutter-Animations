@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animation/animations/shimmer/shimmer.dart';
 
 class TransformAnimation extends StatefulWidget {
   _TransformAnimation createState() => _TransformAnimation();
@@ -13,46 +14,52 @@ class _TransformAnimation extends State<TransformAnimation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Transform Matrix4')),
-      body: Center(
-        child: Transform(
-          alignment: FractionalOffset.center,
-          transform: Matrix4(
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            1,
-          )
-            ..rotateX(x)
-            ..rotateY(y)
-            ..rotateZ(z),
-          child: GestureDetector(
-            onPanUpdate: (DragUpdateDetails details) {
-              setState(() {
-                y -= details.delta.dx / 100;
-                x += details.delta.dy / 100;
-              });
-            },
-            child: Container(
-              width: 200,
-              height: 200,
-              color: Colors.blueGrey,
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Move Me',
-                  style: TextStyle(color: Colors.white),
+      body: Shimmer(
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade400, Colors.blue.shade700],
+        ),
+        period: Duration(milliseconds: 250),
+        child: Center(
+          child: Transform(
+            alignment: FractionalOffset.center,
+            transform: Matrix4(
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+            )
+              ..rotateX(x)
+              ..rotateY(y)
+              ..rotateZ(z),
+            child: GestureDetector(
+              onPanUpdate: (DragUpdateDetails details) {
+                setState(() {
+                  y -= details.delta.dx / 100;
+                  x += details.delta.dy / 100;
+                });
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                color: Colors.blueGrey,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Move Me',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
