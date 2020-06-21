@@ -1,4 +1,4 @@
-# flutter_animation
+# Flutter Animations
 
 A new Flutter project for learning and experimenting with animations.
 
